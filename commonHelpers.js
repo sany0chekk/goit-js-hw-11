@@ -1,0 +1,12 @@
+import{S as d,i as c}from"./assets/vendor-8c59ed88.js";(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const i of t.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&o(i)}).observe(document,{childList:!0,subtree:!0});function a(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function o(e){if(e.ep)return;e.ep=!0;const t=a(e);fetch(e.href,t)}})();function p(s){const r=new URLSearchParams({key:"43306463-04f5e758a9e005b63fe743cb3",q:s,image_type:"photo",orientation:"horizontal",safesearch:!0});return fetch(`https://pixabay.com/api/?${r}`).then(a=>{if(!a.ok)throw new Error(a.status);return a.json()})}const l=document.querySelector(".gallery"),n=document.querySelector(".loader");function f(s){if(s.preventDefault(),!s.target.search.value.trim())return c.warning({message:"The field cannot be empty!",position:"topRight"});n.classList.remove("is-hidden"),n.classList.add("is-active"),l.innerHTML="",setTimeout(()=>{p(s.target.search.value).then(r=>{if(s.target.search.value="",r.totalHits===0)return c.error({message:"Sorry, there are no images matching your search query. Please, try again!",position:"topRight"});y(r.hits),g.refresh()}).catch(r=>console.log(r)).finally(()=>{n.classList.remove("is-active"),n.classList.add("is-hidden")})},500)}const g=new d(".gallery a",{captionsData:"alt",captionDelay:250});function y(s){const r=s.map(({webformatURL:a,largeImageURL:o,tags:e,likes:t,views:i,comments:u,downloads:m})=>`<li class="gallery-item">
+        <a href="${o}" class="gallery-item-link">
+          <img src="${a}" alt="${e}" class="gallery-item-img" />
+          <div class="gallery-item-content">
+            <p class="gallery-item-descr">Likes<span>${t}</span></p>
+            <p class="gallery-item-descr">Views<span>${i}</span></p>
+            <p class="gallery-item-descr">Comments<span>${u}</span></p>
+            <p class="gallery-item-descr">Donwloads<span>${m}</span></p>
+          </div>
+        </a>
+      </li>`).join("");l.insertAdjacentHTML("beforeend",r)}const h=document.querySelector(".form");document.querySelector(".gallery");h.addEventListener("submit",f);
+//# sourceMappingURL=commonHelpers.js.map
